@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Animated } from "react-native";
+import { View, Text, Animated,StyleSheet } from "react-native";
+import { useAppContext } from './AppContext';
 
 const BreathingExercise = ({ stressLevel }) => {
-  
+   const {isMeasuring ,setIsMeasuring,captureCount, setCaptureCount} = useAppContext();
   const [instruction, setInstruction] = useState("Breathe In...");
   const scaleAnim = useState(new Animated.Value(1))[0];
 
@@ -31,15 +32,38 @@ const BreathingExercise = ({ stressLevel }) => {
   }, []);
 
   return (
-    <View style={{ alignItems: "center", marginTop: 20 }}>
-      {(stressLevel === "Mild Stress 😕" || stressLevel === "High Stress 😰") && 
-        <Animated.View style={{ transform: [{ scale: scaleAnim }], marginBottom: 10 }}>
-          <Text style={{ fontSize: 24, fontWeight: "bold" }}>{instruction}</Text>
-        </Animated.View>
-      }
-      <Text style={{ fontSize: 18}}>Stress Level: {stressLevel}</Text>
+    <View>
+      <View style={{ alignItems: "center", marginTop: 15 }}>
+        {(stressLevel === "Mild Stress 😕" || stressLevel === "High Stress 😰") && 
+          <Animated.View style={{ transform: [{ scale: scaleAnim }], marginBottom: 10 }}>
+            <Text style={styles.animText}>{instruction}</Text>
+          </Animated.View>
+        }
+        
+      </View>
+      {!isMeasuring && (
+      <View style={{ flexDirection: 'row', width: '100%' }}>
+        <Text style={styles.stressText}>Stress Level: {stressLevel}</Text>
+      </View>
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  animText:{
+    fontSize: 20, 
+    fontWeight: "bold",
+    color:'#ffffff',
+  },
+  stressText:{
+    fontSize: 15,
+    fontWeight:'normal',
+    color:'#ffffff',
+    marginTop: 10,
+    textAlign: 'left',
+    flex:1,
+  }
+})
 
 export default BreathingExercise;

@@ -20,8 +20,10 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "CAMERA"
-      ]
+        "CAMERA",
+        "RECORD_AUDIO"
+      ],
+      "package": "com.sigalshemer.SBC"
     },
     "web": {
       "bundler": "metro",
@@ -42,7 +44,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b2e83036-06fb-40e8-b2b7-3a329481702a"
+      }
     }
   }
 }
-

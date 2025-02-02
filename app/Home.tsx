@@ -14,13 +14,12 @@ export default function HomeScreen() {
   };
 
    const handleHeartRateDetected = (heartRate: number) => {
-    console.log("Heart Rate");
     const detectedStress = analyzeStressLevel(heartRate);
    setStressLevel(detectedStress); 
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View style={styles.bodyContainer}>
       <HeartRateScanner onHeartRateDetected={handleHeartRateDetected} />
       {stressLevel && <BreathingExercise stressLevel={stressLevel} />}
     </View>
@@ -31,7 +30,8 @@ const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#0B2660',
+    justifyContent: "center", 
+    alignItems: "center"
   },
   safeAreaView: {
     flex: 1,
